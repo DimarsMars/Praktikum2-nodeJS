@@ -1,0 +1,154 @@
+openapi: 3.0.3
+info:
+  title: Praktikum REST API 2
+  version: "1.0"
+servers:
+- url: http://localhost:3000
+paths:
+  /user:
+    get:
+      description: Endpoint untuk Get all users
+      operationId: userGET
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/user'
+                type: array
+          description: Berhasil
+        "500":
+          description: Server Gagal
+        "403":
+          description: Tidak ada akses
+      x-eov-operation-handler: controllers/DefaultController
+    post:
+      description: Endpoint untuk Add User
+      operationId: userPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+          description: Berhasil
+        "500":
+          description: Server Gagal
+        "403":
+          description: Tidak ada akses
+      x-eov-operation-handler: controllers/DefaultController
+  /users/{id}:
+    delete:
+      description: Endpoint untuk Delete user by id
+      operationId: usersIdDELETE
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: Berhasil
+        "500":
+          description: Server Gagal
+        "403":
+          description: Tidak ada akses
+      x-eov-operation-handler: controllers/DefaultController
+    get:
+      description: Endpoint untuk Get user by id
+      operationId: usersIdGET
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+          description: Berhasil
+        "500":
+          description: Server Gagal
+        "403":
+          description: Tidak ada akses
+      x-eov-operation-handler: controllers/DefaultController
+    put:
+      description: Endpoint untuk Update user by id
+      operationId: usersIdPUT
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: email
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: age
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+          description: Berhasil
+      x-eov-operation-handler: controllers/DefaultController
+components:
+  schemas:
+    user:
+      example:
+        name: name
+        id: 0
+        email: email
+        age: age
+        creatdAt: creatdAt
+        updatedAt: updatedAt
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        age:
+          type: string
+        creatdAt:
+          type: string
+        updatedAt:
+          type: string
+      type: object
