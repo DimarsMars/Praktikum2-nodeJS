@@ -47,7 +47,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/user'
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                age:
+                  type: integer
+              required:
+                - name
+                - email
+                - age
       responses:
         '200':
           description: Berhasil
