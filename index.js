@@ -21,7 +21,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/user', (req, res) => {
     db.query(
-        'SELECT * FROM user', (err, results) => {
+        'SELECT * FROM users', (err, results) => {
             if (err) {
                 res.status(500).send('Internal Server Error');
                 return;
@@ -33,7 +33,7 @@ app.get('/user', (req, res) => {
     
 app.post('/user', (req, res) => {
     db.query(
-        'INSERT INTO user (name, email, age) VALUES (?, ?, ?)', [req.body.name,req.body.email,req.body.age], 
+        'INSERT INTO users (name, email, age) VALUES (?, ?, ?)', [req.body.name,req.body.email,req.body.age], 
         (err, result) => {
         if (err) {
             res.status(500).send('Internal Server Error');
@@ -47,7 +47,7 @@ app.post('/user', (req, res) => {
 
 app.get('/users/:id', (req, res) => {
     db.query(
-        'SELECT * FROM user WHERE id = ?', [req.params.id], (err, result) => {
+        'SELECT * FROM users WHERE id = ?', [req.params.id], (err, result) => {
         if (err) {
             res.status(500).send('Internal Server Error');
             return;
@@ -59,7 +59,7 @@ app.get('/users/:id', (req, res) => {
 
 app.put('/users/:id', (req, res) => {
     db.query(
-        'UPDATE user SET name = ?, email = ?, age = ? WHERE id = ?', [req.query.name,req.query.email,req.query.age,req.params.id], 
+        'UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?', [req.query.name,req.query.email,req.query.age,req.params.id], 
         (err, result) => {
         if (err) {
             res.status(500).send('Internal Server Error');
@@ -72,7 +72,7 @@ app.put('/users/:id', (req, res) => {
 
 app.delete('/users/:id', (req, res) => {
     db.query(
-        'DELETE FROM user WHERE id = ?', [req.params.id], 
+        'DELETE FROM users WHERE id = ?', [req.params.id], 
         (err, result) => {
         if (err) {
             res.status(500).send('Internal Server Error');
