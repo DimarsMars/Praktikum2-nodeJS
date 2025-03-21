@@ -17,7 +17,7 @@ components:
           type: string
         age:
           type: string
-        creatdAt:
+        createdAt:
           type: string
         updatedAt:
           type: string
